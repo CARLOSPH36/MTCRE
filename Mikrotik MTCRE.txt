@@ -1,0 +1,104 @@
+Mikrotik MTCRE
+
+Algunas empresas requieren soporte al cotiza/comprar equipos Mikrotik.
+
+Link de consultants/latinamerica/peru:
+https://mikrotik.com/consultants/latinamerica/peru
+
+
+RB5009UG+S+IN
+Credenciales:
+User: admin
+Pasword: RingRing
+Password de Fabrica(Default): BRKHRVVIK2
+
+------------------------------------------------
+
+/ip firewall filter add action=accept chain=forward in-interface=zerotier1 place-before=0
+/ip firewall filter add action=accept chain=input in-interface=zerotier1 place-before=0
+------------------------------------------------
+ROUTE TABLE COLOR INFORMATION:
+BLACK are currently active and will forward traffic.
+BLUE are not active, but may become active if the current active route becomes inactive.
+GREY have been disable and will not be used.
+------------------------------------------------
+ROUTE DISTANCE:
+Conected route distance is 0
+Static route distance is 1 by default, unless changed by administrator.
+Routes that are changed to 255 will no be routed at all.
+* Longest Prefix-Match
+------------------------------------------------
+Default ROUTE:
+0.0.0.0/0 
+- This means that all traffic will be routed out to this gateway if no route are matched.
+- If no default route exists packets are simple dropped by the router.
+
+------------------------------------------------
+OSPF
+- Link state protocol
+- Interior Gateway Protocol(IGP).
+- Administrative Distance 110 and give the "o" flag.
+- Use multicast address 224.0.0.5 and 224.0.0.6
+- Best path selection using Shortes Path First(SPF) algorith(also refered as Djikstra algorith). The path
+	with the least total cost(lowest OSPF metric)will be installed on routing table.
+
+* There is NO "main" Router in OSPF network.
+* The download path may be different than the upload path.
+* One of the common mistakes is to check the paths from one side only. You should look at the paths from both sides.
+
+
+OSPF Network Types
+
+network-type (broadcast | nbma | point-to-point | ptmp; Default: broadcast)
+* Broadcast and the nbma types elect a designated router(DR) and a BDR, the point-to-point and the ptmp DOES NOT.
+
+*
+
+DR and BDR:
+The designated Router(DR) and the BDR are useful when you have multiple(more than two) OSPF routers in the same Layer 2 broadcast domain,
+to reduce the OSPF traffic.
+* We do not need a DR and BDR between just two routers.
+The point-to-point is a network type that will run OSPF between two routers only and does not elect designated router.
+[The DR maintains a complete topology table of the network and sends updates to the other routers participating in OSPF updates]
+
+* OSPF Extra Tips:
+Its quite easy to use two OSPF path as: faileover.
+
+
+https://wiki.mikrotik.com/wiki/Manual:Routing/OSPF
+
+HOW OSPF WORKS:
+1. Establish neighbor relationship between routers(OSPF adjency).
+2. Exchange database description, Link-State Request & Link-State Update.
+3. Build Link-State Database(LSDB).
+4. Build Shortes Path First tree, based on LSDB.
+5. Calculate Shortes path using Djikstra algorith.
+6. Installing best-path route in routing table.
+
+ROUTERS TYPES:
+- Internal Router(IR).
+- Area Border Router(ABR).
+- Autonomous System Boundary Router(ASBR).
+- Designated Router(DR).
+- Backup Designated Router(BDR).
+
+OSPF PACKETS:
+- Hello.
+- Database Description(DD).
+- Link State Request(LSR).
+- Link State Update(LSU).
+- Link State Acknowledge(LSAck).
+
+
+
+
+------------------------------------------------
+THE BACKBONE AREA:
+The backbone area(area-id=0.0.0.0)forms the core of the OSPF network.
+
+* Mikrotik recomienda poner un maximo de 80 routers por area.
+
+
+------------------------------------------------
+
+
