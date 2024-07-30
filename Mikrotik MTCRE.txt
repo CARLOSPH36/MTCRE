@@ -98,10 +98,14 @@ The backbone area(area-id=0.0.0.0)forms the core of the OSPF network.
 
 * Mikrotik recomienda poner un maximo de 80 routers por area.
 
-
 ------------------------------------------------
-One more line
-other
-fourth
+GITHUB:
+$ git status
+$ git add Mikrotik\ MTCRE.txt
+$ git commit -m "cinco"
+$ git status
+$ git pull origin main
+$ git push --force origin main
+
 
 
