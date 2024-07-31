@@ -41,6 +41,8 @@ OSPF
 - Use multicast address 224.0.0.5 and 224.0.0.6
 - Best path selection using Shortes Path First(SPF) algorith(also refered as Djikstra algorith). The path
 	with the least total cost(lowest OSPF metric)will be installed on routing table.
+- Todas las interfaces tienen un costo por default de 100.
+
 
 * There is NO "main" Router in OSPF network.
 * The download path may be different than the upload path.
@@ -90,7 +92,7 @@ OSPF PACKETS:
 - Link State Acknowledge(LSAck).
 
 
-
+https://wiki.mikrotik.com/wiki/Manual:Routing/OSPF
 
 ------------------------------------------------
 THE BACKBONE AREA:
@@ -107,5 +109,13 @@ $ git status
 $ git pull origin main
 $ git push --force origin main
 
+git diff --stat --cached origin/main
 
+
+
+https://www.youtube.com/watch?v=6DmAmRyqD7A
+
+* Manual Mikrotik Routing/OSPF pg 871
+
+https://wiki.mikrotik.com/wiki/Manual:Routing/OSPF
 
