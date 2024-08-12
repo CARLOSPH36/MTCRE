@@ -4,14 +4,6 @@ Algunas empresas requieren soporte al cotiza/comprar equipos Mikrotik.
 
 Link de consultants/latinamerica/peru:
 https://mikrotik.com/consultants/latinamerica/peru
-
-
-RB5009UG+S+IN
-Credenciales:
-User: admin
-Pasword: RingRing
-Password de Fabrica(Default): BRKHRVVIK2
-
 ------------------------------------------------
 
 /ip firewall filter add action=accept chain=forward in-interface=zerotier1 place-before=0
@@ -32,6 +24,8 @@ Default ROUTE:
 0.0.0.0/0 
 - This means that all traffic will be routed out to this gateway if no route are matched.
 - If no default route exists packets are simple dropped by the router.
+* - C connect --> Son redes directamente conectadas, LAN y WAN, y se agregan a la tabla de rutero dinamicamente.
+
 
 ------------------------------------------------
 OSPF
@@ -98,7 +92,9 @@ https://wiki.mikrotik.com/wiki/Manual:Routing/OSPF
 THE BACKBONE AREA:
 The backbone area(area-id=0.0.0.0)forms the core of the OSPF network.
 
-* Mikrotik recomienda poner un maximo de 80 routers por area.
+* Mikrotik recomienda poner un maximo de 50 routers por area.
+It is not recommended separate areas with fewer than 50 routers. The maximum number of routers in one area is mostly dependent on CPU power you have for routing table calculation.
+
 
 ------------------------------------------------
 GITHUB:
@@ -112,10 +108,29 @@ $ git push --force origin main
 git diff --stat --cached origin/main
 
 
-
+OSPF: Concepto Y Migración De Una Red Bridge A Red Ruteada:
 https://www.youtube.com/watch?v=6DmAmRyqD7A
+
+OSPF Course Wilmer Almazan:
+https://www.youtube.com/watch?v=f9FDNCTFfeY&list=PLNRJTwfzNNlYJY6Sd4E5Q0H3oaBTlWK3_
+
 
 * Manual Mikrotik Routing/OSPF pg 871
 
 https://wiki.mikrotik.com/wiki/Manual:Routing/OSPF
+
+------------------------------------------------
+* - C connect --> Son redes directamente conectadas, LAN y WAN, y se agregan a la tabla de rutero dinamicamente.
+
+LEARNING ROUTES:
+
+- A router learns about non-connected routes via:
+	- Static configuration. e.g /ip route add dst-address=192.168.2.0/24 gateway=172.16.1.2 (Next hop WAN).
+		- Do not support faileover by default, it must be configured.
+	- Dynamic Routing Protocols.
+		- They have Functions(exchange routes), Rules, and Formats(messages).
+		
+- RIP is not used, based on numbers of hops.
+- OSPF desition routing based on cost.
+- EIGRP is only supported on Cisco devices.
 
